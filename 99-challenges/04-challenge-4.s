@@ -37,10 +37,12 @@ sub AL, 0x30
 ;;;;; Compare vs stored number
 cmp AL, byte [offset number]
 je printmsg1
-sub byte [offset number], 1
+
+; Is the input within 1 of the stored number?
+sub byte [offset number], 1         ; AL == number - 1?
 cmp AL, byte [offset number]
 je printmsg2
-add byte [offset number], 2
+add byte [offset number], 2         ; AL == number + 1?
 cmp AL, byte [offset number]
 je printmsg2
  
