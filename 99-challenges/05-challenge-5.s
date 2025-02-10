@@ -89,10 +89,9 @@ mov BP, offset msg3
 int 0x10
 jmp try_again
 
-; print "you're close"
+;;;;; Print "you're close"
 printmsg2:
 xor AH, AH
-xor DX, DX              ; avoid unwanted whitespace
 mov AH, 0x13
 mov CX, offset msg2null
 sub CX, offset msg2
