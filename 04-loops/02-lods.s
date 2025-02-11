@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;; The lods insturction ;;;;;
+;;;;; The lods instruction ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; In brief, lods allows us to sequentially loop over
@@ -59,5 +59,5 @@ mov BP, offset string
 ; because it's already counted for us!
 int 0x10
 
-; lods is very powerful because it opens up a lof of functionality
+; lods is very powerful because it opens up a lot of functionality
 ; that relies on iterating over an array of data.
