@@ -16,6 +16,3 @@ main:
 	mov	eax, 0
 	pop	rbp
 	ret
-	.size	main, .-main
-	.ident	"GCC: (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
-	.section	.note.GNU-stack,"",@progbits
