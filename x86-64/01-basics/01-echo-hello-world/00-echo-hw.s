@@ -39,7 +39,7 @@ main:
     mov rdx, length             # length of string to print
     syscall
 
-    # check if syscall wrote bytes (its return value is the 
+    # Check if syscall wrote bytes (its return value is the 
     # number of bytes it wrote)
     cmp rax, 0    
     # -1 will be returned if there is an error, so return that          
@@ -52,7 +52,20 @@ main:
     mov rdx, max_input_length
     syscall
 
-    # otherwise, zero out rax and return
+    # According to the man page, on success the read syscall
+    # returns the number of bytes written. We can use that
+    # to output the message that was entered.
+    mov rdx, rax                # Capture the length of input
+    mov rax, 0x01               # Write syscall code
+    mov rdi, 1                  # fd is stdout
+    lea rsi, input[rip]
+    syscall
+
+    # Check if bytes were written
+    cmp rax, 0
+    jl return
+
+    # Otherwise, zero out rax and return
     xor rax, rax
 
     return:
