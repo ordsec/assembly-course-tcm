@@ -1,6 +1,16 @@
 # A minimum GAS boilerplate that will compile and run
 
 .intel_syntax noprefix
+
+# .section .data
+
+# Your data here
+
+# Function header
+# .text
+# .globl    <func_name>
+# .type     <func_name>, @function
+
 .text
 .globl      main
 .type       main, @function
