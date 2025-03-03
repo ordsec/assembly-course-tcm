@@ -12,6 +12,7 @@ message:
     # by going back however many bytes the message is
     # and another byte
     .equ length, .-message - 1
+    
     .text
     .globl  main
     .type   main, @function
