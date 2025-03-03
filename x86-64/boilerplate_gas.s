@@ -2,14 +2,19 @@
 
 .intel_syntax noprefix
 
-# .section .data
+.section .data
 
 # Your data here
 
-# Function header
-# .text
-# .globl    <func_name>
-# .type     <func_name>, @function
+# Function declaration for <func_name>
+.text
+.globl    <func_name>
+.type     <func_name>, @function
+
+<func_name>:
+    # Function logic
+
+    .size   <func_name>, .-<func_name>
 
 .text
 .globl      main
