@@ -19,6 +19,8 @@ main:
     push rbp
     mov rbp, rsp
 
+    # call <func_name>
+
     xor rax, rax
     mov rsp, rbp
     pop rbp

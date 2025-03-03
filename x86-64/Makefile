@@ -2,14 +2,14 @@
 # Change SOURCEFILE, OBJFILE, and BINARY values 
 # to the desired filenames.
 
-OBJFILE.o: SOURCEFILE.s
-	as -g -o OBJFILE.o SOURCEFILE.s
+00-objfile.o: 00-src.s
+	as -g -o 00-objfile.o 00-src.s
 
-BINARY: OBJFILE.o
-	gcc -o BINARY OBJFILE.o
-	rm -f OBJFILE.o
+BINARY: 00-objfile.o
+	gcc -o BINARY 00-objfile.o
+	rm -f 00-objfile.o
 
-all: OBJFILE.o BINARY
+all: 00-objfile.o BINARY
 
 clean: 
 	rm -f BINARY
