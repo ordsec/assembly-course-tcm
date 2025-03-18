@@ -1,4 +1,5 @@
-# This version is with hard-coded length - no args used yet
+# This version is with args being passed in via registers,
+# values are still hard-coded.
 
 .intel_syntax noprefix
 
@@ -23,17 +24,33 @@ message:
 .type     printstr, @function
 
 # printstr function logic
+
+# Register call order: rdi, rsi, rdx, rcx, r8, r9
+# Important point is that's the order they're called
+# by the CPU, but we're free to pass things around
+# in whatever order we choose, as long as everything
+# is in the proper register and nothing gets overwritten
+# in the process.
+
+# printstr will be receiving two arguments
+# (pointer to where string starts and its length)
+
+# print(char *strToPrint, int length)
+
+# In this version, we're simply receiving these
+# via registers
 printstr:
     push rbp
     mov rbp, rsp
 
-    # Write to screen
+    # Write to screen - get 2nd arg, then 1st
+    # The order is such because rsi needs to be preserved
+    # as it'll be used to store the string pointer
+    mov edx, esi            # Receive length from esi  
+    mov rsi, rdi            # Receive ptr to beginning of string 
+                            # from rdi. We don't need lea here
     mov rax, 0x01           # Write syscall - 0x01
     mov rdi, 1              # fd - STDOUT (1)
-    lea rsi, message[rip]
-    mov edx, length[rip]    # Because length is a .long (dword),
-                            # we need the bottom 32 bits, while
-                            # the top will be zero-extended
     syscall
 
     # Check if bytes were written
@@ -61,8 +78,8 @@ main:
     push rbp
     mov rbp, rsp
 
-    # The only thing that happens here is
-    # calling `printstr`
+    mov esi, DWORD PTR length[rip]      # Pass 2nd arg
+    lea rdi, message[rip]               # Pass 1st arg
     call printstr
 
     mov rsp, rbp
